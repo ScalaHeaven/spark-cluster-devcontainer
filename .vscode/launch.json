@@ -9,6 +9,7 @@
       "buildTarget": "file:/workspaces/spark-cluster-devcontainer/#root/Compile",
       "args": [],
       "jvmOptions": [
+        "-Xmx4g",
         "--add-opens=java.base/java.lang=ALL-UNNAMED",
         "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
         "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",

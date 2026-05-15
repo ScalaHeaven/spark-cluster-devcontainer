@@ -54,12 +54,15 @@ target/spark-output/transaction-summary
 The default Spark master is:
 
 ```text
-local-cluster[3,1,1024]
+local-cluster[3,1,4096]
 ```
 
 That Spark master starts one local standalone master and three worker JVMs, each
-with one core and 1024 MiB of worker memory. Use this mode when you want the
+with one core and 4096 MiB of worker memory. Use this mode when you want the
 template to behave like a small cluster without managing external services.
+The Spark executors are configured with `spark.executor.memory=4g`, and the
+application driver JVM uses `-Xmx4g` for `sbt run`, VS Code debug launches, and
+the production Docker image.
 
 ## CSV Contract
 
@@ -146,8 +149,8 @@ sbt -Dsbt.batch=true scalafmtAll
 
 ## Important Files
 
-- `build.sbt`: pins Scala, adds Spark SQL, configures Java module options for
-  Spark, and builds an assembly JAR.
+- `build.sbt`: pins Scala, adds Spark SQL, configures the `sbt run` JVM heap,
+  configures Java module options for Spark, and builds an assembly JAR.
 - `src/main/scala/Main.scala`: Spark CSV pipeline entry point.
 - `scripts/GenerateTransactions.scala`: deterministic generator for the
   checked-in transaction CSV sample.
@@ -158,12 +161,12 @@ sbt -Dsbt.batch=true scalafmtAll
   local cluster executors.
 - `Dockerfile`: production multi-stage build for the Spark application. It
   copies the same minimal Spark home into the runtime image so
-  `local-cluster[3,1,1024]` can launch worker executors.
+  `local-cluster[3,1,4096]` can launch worker executors.
 - `.vscode/launch.json`: Metals/Scala debug launch config for `Main`.
 
 ## Notes
 
-Spark runs in `local-cluster[3,1,1024]` mode by default, which starts one local
+Spark runs in `local-cluster[3,1,4096]` mode by default, which starts one local
 standalone master and three workers for development. For an external cluster,
 pass the Spark master URL as the third application argument and ensure the
 input/output paths are accessible to the driver and executors.

@@ -36,8 +36,9 @@ import org.apache.spark.storage.StorageLevel
 object Main {
   private val DefaultInputPath = "data/input/transactions.csv"
   private val DefaultOutputPath = "target/spark-output/transaction-summary"
-  private val DefaultMaster = "local-cluster[3,1,1024]"
+  private val DefaultMaster = "local-cluster[3,1,4096]"
   private val AnalysisPartitions = "12"
+  private val ExecutorMemory = "4g"
   private val SparkJavaOptions = Seq(
     "--add-opens=java.base/java.lang=ALL-UNNAMED",
     "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
@@ -94,6 +95,7 @@ object Main {
           .config("spark.sql.shuffle.partitions", AnalysisPartitions)
           .config("spark.default.parallelism", AnalysisPartitions)
           .config("spark.executor.instances", "3")
+          .config("spark.executor.memory", ExecutorMemory)
           .config(
             "spark.driver.extraJavaOptions",
             SparkJavaOptions.mkString(" ")

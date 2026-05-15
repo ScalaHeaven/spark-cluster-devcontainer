@@ -29,6 +29,7 @@ lazy val root = (project in file("."))
     libraryDependencies += ("org.apache.spark" %% "spark-sql" % sparkVersion)
       .exclude("commons-logging", "commons-logging"),
     Compile / run / fork := true,
+    Compile / run / javaOptions += "-Xmx4g",
     Compile / run / javaOptions ++= sparkJavaOptions,
     assembly / mainClass := Some("Main"),
     assembly / assemblyJarName := "app.jar",

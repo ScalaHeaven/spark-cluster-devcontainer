@@ -21,14 +21,16 @@ just application code.
 ## Important Files
 
 - `build.sbt`: main sbt build definition. Pins Scala `2.13.18`, enables
-  SemanticDB, adds Spark SQL `4.1.1`, sets project metadata, configures Spark
-  Java module options, and configures `sbt-assembly`.
+  SemanticDB, adds Spark SQL `4.1.1`, sets project metadata, configures the
+  `sbt run` JVM heap, configures Spark Java module options, and configures
+  `sbt-assembly`.
 - `project/build.properties`: pins sbt `1.12.11`.
 - `project/plugins.sbt`: declares sbt plugins, currently `sbt-assembly` and
   `sbt-scalafmt`.
 - `src/main/scala/Main.scala`: Spark CSV transaction pipeline with the `Main`
-  main class. Defaults to `local-cluster[3,1,1024]`, which starts one Spark
-  master and three worker JVMs locally.
+  main class. Defaults to `local-cluster[3,1,4096]`, which starts one Spark
+  master and three worker JVMs locally. Configures Spark executors with
+  `spark.executor.memory=4g`.
 - `scripts/GenerateTransactions.scala`: deterministic Scala script that writes
   the sample transaction CSV.
 - `data/input/transactions.csv`: 100,000-row sample CSV with the fixed
