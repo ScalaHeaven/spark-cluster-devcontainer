@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Configuration
-WORKSPACE="${WORKSPACE:-/workspaces/spark-devcontainer}"
+WORKSPACE="${WORKSPACE:-/workspaces/spark-cluster-devcontainer}"
 DEV_USER="${DEV_USER:-vscode}"
 DEV_GROUP="${DEV_GROUP:-$DEV_USER}"
 DEV_HOME="${DEV_HOME:-/home/$DEV_USER}"

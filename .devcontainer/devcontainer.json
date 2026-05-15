@@ -4,6 +4,7 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "initializeCommand": "find . -type d -name .scala-build -prune -exec rm -rf {} + 2>/dev/null || true; mkdir -p .metals .bsp target project/target && chmod -R u+rwX . 2>/dev/null || true",
   "updateRemoteUserUID": true,
   "remoteUser": "vscode",
@@ -27,6 +28,6 @@
       }
     }
   },
-  "postStartCommand": "bash .devcontainer/post-start.sh",
-  "postCreateCommand": "cd /workspaces/spark-devcontainer && START_METALS_MCP=0 bash .devcontainer/post-start.sh && node --version && npm --version && codex --version && scala-cli --version && scalac -version && sbt -Dsbt.batch=true update sbtVersion && bash .devcontainer/post-start.sh"
+  "postStartCommand": "WORKSPACE=${containerWorkspaceFolder} bash .devcontainer/post-start.sh",
+  "postCreateCommand": "WORKSPACE=${containerWorkspaceFolder} START_METALS_MCP=0 bash .devcontainer/post-start.sh && node --version && npm --version && codex --version && scala-cli --version && scalac -version && sbt -Dsbt.batch=true update sbtVersion && WORKSPACE=${containerWorkspaceFolder} bash .devcontainer/post-start.sh"
 }

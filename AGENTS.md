@@ -82,6 +82,9 @@ sbt -Dsbt.batch=true scalafmtAll
   they support the requested behavior. Keep Spark dependencies explicit.
 - Keep devcontainer scripts idempotent. They are run on creation and on start,
   so repeated execution must be safe.
+- Keep devcontainer workspace paths aligned with
+  `/workspaces/spark-cluster-devcontainer`; Metals and Metals MCP write local
+  state under that workspace path.
 - Preserve non-root `vscode` user behavior in container changes unless the task
   explicitly requires a different model.
 - Prefer Coursier-based tool installation patterns already used in the

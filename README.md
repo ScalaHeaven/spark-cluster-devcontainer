@@ -20,6 +20,9 @@ output.
 ## Quick Start
 
 Open the folder in VS Code and run **Dev Containers: Reopen in Container**.
+The devcontainer opens at `/workspaces/spark-cluster-devcontainer` and repairs
+workspace ownership on start so Metals can write `.metals/metals.log` as the
+non-root `vscode` user.
 
 Inside the container:
 

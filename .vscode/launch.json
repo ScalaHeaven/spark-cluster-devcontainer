@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "Main",
       "mainClass": "Main",
-      "buildTarget": "file:/workspaces/spark-devcontainer/#root/Compile",
+      "buildTarget": "file:/workspaces/spark-cluster-devcontainer/#root/Compile",
       "args": [],
       "jvmOptions": [
         "--add-opens=java.base/java.lang=ALL-UNNAMED",
